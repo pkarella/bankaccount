@@ -9,8 +9,8 @@ var Account = function (name, newDeposit, withdrawal, currentAmount) {
 }
 
 Account.prototype.makeDeposit = function() {
-  var newBalance= this.newDeposit;
-  return newBalance;
+  return this.newDeposit + this.balance;
+
 
 
 }
@@ -23,22 +23,23 @@ $(document).ready(function() {
   $("form#formone").submit(function(event) {
     event.preventDefault();
 
-    var inputtedName = $("input#name").val();
-    var bankAmount = parseInt($("#bankAmount").val());
-    var inputtednewDeposit = parseInt($("#newDeposit").val());
-    var withdrawal = $("#withdrawal").val();
+    newAccount.name = $("input#name").val();
+    newAccount.balance = parseInt($("#bankAmount").val());
+    newAccount.newDeposit = parseInt($("#newDeposit").val());
+    newAccount.withdrawal = parseInt($("#withdrawal").val());
 
 
-    var newAccount = new Account(inputtedName, inputtednewDeposit, withdrawal, bankAmount);
-
-    console.log(typeof bankAmount);
+    console.log(newAccount.balance);
     $("ul#test").append("<li>" + newAccount.balance +"</li>");
 
   });
 
   $("form#formtwo").submit(function(event) {
     event.preventDefault();
-    newAccount.makeDeposit();
-    $("ul#test").append("<li>" + newAccount.balance +"</li>");
+    newAccount.newDeposit = parseInt($("#newDeposit").val());
+
+    console.log(newAccount.newDeposit);
+    var test = newAccount.makeDeposit();
+    $("ul#test").append("<li>" + test +"</li>");
   });
 });
